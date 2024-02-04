@@ -4,7 +4,6 @@ const setCargo = async (req, res) => {
     try {
         const {
             userId,
-            truckerId,
             loadingPoint,
             unloadingPoint,
             truckType,
@@ -16,7 +15,6 @@ const setCargo = async (req, res) => {
 
         const newCargo =  await Cargo.create({
             userId,
-            truckerId,
             loadingPoint,
             unloadingPoint,
             truckType,
