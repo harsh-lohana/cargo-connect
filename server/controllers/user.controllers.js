@@ -40,6 +40,7 @@ const signUpUser = async (req, res) => {
     return res.json({
       msg: "User created successfully!",
       token,
+      id : user._id,
       name : user.name,
       role : user.role,
       email : user.email
@@ -74,6 +75,7 @@ const logInUser = async (req, res) => {
     return res.status(200).json({
       msg: "User logged in successfully!",
       token,
+      id : user._id,
       name : user.name,
       role : user.role,
       email : user.email
