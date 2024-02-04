@@ -35,7 +35,7 @@ const SignupPage = () => {
         toast.success("Signed in!");
         localStorage.setItem("userInfo", JSON.stringify(data));
         setLoading(false);
-        // navigate("/");
+        navigate("/");
       } catch (error) {
         setError(error.response.data.message);
         toast.error("Invalid email or password!");
