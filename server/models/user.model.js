@@ -17,9 +17,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    isTrucker: {
-        type: Boolean,
-        default: false
+    //role : 0->admin, 1->trucker, 2->consignment poster
+    role: {
+        type: Number,
+        default: 1
     }
 }, {timestamps: true});
 

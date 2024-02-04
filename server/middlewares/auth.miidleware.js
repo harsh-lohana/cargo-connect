@@ -16,4 +16,10 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = { authMiddleware };
+const isAdmin = async(req,res,next) => {
+  if(req.user.role !== 0){
+    return res.status(401).send('Access denied, you must be admin');
+  }
+}
+
+module.exports = { authMiddleware, isAdmin};
