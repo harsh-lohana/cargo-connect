@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/User/Dashboard";
 
 const App = () => {
   return (

@@ -40,6 +40,9 @@ const signUpUser = async (req, res) => {
     return res.json({
       msg: "User created successfully!",
       token,
+      name : user.name,
+      role : user.role,
+      email : user.email
     });
   } catch (error) {
     console.log(error.message);
@@ -71,6 +74,9 @@ const logInUser = async (req, res) => {
     return res.status(200).json({
       msg: "User logged in successfully!",
       token,
+      name : user.name,
+      role : user.role,
+      email : user.email
     });
   } catch (error) {
     console.log(error.message);
