@@ -39,4 +39,4 @@ const cargoSchema = new mongoose.Schema({
 
 const Cargo = mongoose.model("Cargo", cargoSchema);
 
-module.exports = Cargo;
+module.exports = {Cargo};
