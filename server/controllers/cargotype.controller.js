@@ -4,7 +4,7 @@ const CargoType = require('../models/cargotype.model');
 exports.createCargoType = async (req, res, next) => {
     try {
         const jobT = await CargoType.create({
-            jobTypeName: req.body.jobTypeName,
+            cargoTypeName: req.body.cargoTypeName,
             user: req.user.id
         });
         res.status(201).json({

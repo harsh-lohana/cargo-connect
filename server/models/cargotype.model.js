@@ -10,11 +10,7 @@ const cargoTypeSchema = new mongoose.Schema({
         required: [true, ' cargo category is required'],
     },
 
-    user: {
-        type: ObjectId,
-        ref: "User",
-        required: true
-    },
+    user: String,
 
 }, { timestamps: true })
 

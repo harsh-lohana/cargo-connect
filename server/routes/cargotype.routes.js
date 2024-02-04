@@ -4,10 +4,12 @@ const { createCargoType, allCargosType, updateCargoType, deleteCargoType } = req
 const {authMiddleware, isAdmin} = require("../middlewares/auth.miidleware")
 
 // /api/type/create
-router.post('/type/create', authMiddleware, isAdmin, createCargoType)
+router.post('/create', authMiddleware, isAdmin, createCargoType)
 // /api/type/jobs
-router.get('/type/jobs', allCargosType)
+router.get('/cargos', allCargosType)
 // /api/type/update/type_id
-router.put('/type/update/:type_id', authMiddleware, isAdmin, updateCargoType)
+router.put('/update/:type_id', authMiddleware, isAdmin, updateCargoType)
 // /api/type/delete/type_id
-router.delete('/type/delete/:type_id', authMiddleware, isAdmin, deleteCargoType)
+router.delete('/delete/:type_id', authMiddleware, isAdmin, deleteCargoType)
+
+module.exports = router;
