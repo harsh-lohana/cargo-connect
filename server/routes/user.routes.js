@@ -11,7 +11,7 @@ router.put("/", authMiddleware, updateUser);
 router.get("/search", authMiddleware, searchUsers);
 router.post("/cargo", setCargo);
 router.get("/cargo" ,getCargoById);
-router.get("/cargo" , getAllCargo);
+router.get("/allcargo" , getAllCargo);
 
 
 module.exports = router;
