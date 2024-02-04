@@ -4,6 +4,7 @@ import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/User/Dashboard";
+import TruckerDashboard from "./pages/Trucker/TruckerDashboard";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/cargoconnect" element={<Dashboard/>}/> 
+            <Route path="/truckerHome" element={<TruckerDashboard/>}/>
           </Routes>
         </main>
       </div>

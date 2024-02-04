@@ -8,7 +8,8 @@ const LandingPage = ({ history }) => {
   useEffect(()=>{
     const user = JSON.parse(localStorage.getItem("userInfo"));
     console.log(user);
-    if(user.role === 1) navigate('/cargoconnect');
+    if(user.role === 2) navigate('/cargoconnect');
+    else if(user.role === 1) navigate('/truckerHome');
   },[])
 
   return (
