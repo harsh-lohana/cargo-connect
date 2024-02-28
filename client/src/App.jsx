@@ -3,9 +3,10 @@ import { Routes, Route } from "react-router-dom";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
 import { Toaster } from "react-hot-toast";
-import Dashboard from "./pages/User/Dashboard";
+import Dashboard from "./pages/User/DashBoard/Dashboard";
 import TruckerDashboard from "./pages/Trucker/TruckerDashboard";
 import { Allorders } from "./pages/Trucker/Allorder/Allorders";
+import UserOrders from "./pages/User/DashBoard/UserOrders";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/cargoconnect" element={<Dashboard/>}/> 
+            <Route path="/userorders" element={<UserOrders/>}/> {/* Added closing tag */}
             <Route path="/truckerHome" element={<TruckerDashboard/>}/>
             <Route path="/allorders" element={<Allorders/>}/>
           </Routes>
