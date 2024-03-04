@@ -1,5 +1,4 @@
 const  { Cargo } = require("../models/cargo.models");
-
 const setCargo = async (req, res) => {
     try {
         const {
@@ -9,30 +8,41 @@ const setCargo = async (req, res) => {
             truckType,
             weight,
             shippingDate,
-            deliveryDate
+            deliveryDate,
+            truckerId
         } = req.body;
         console.log(req.body);
 
-        const newCargo =  await Cargo.create({
+        let defaultTruckerId;
+
+        // If truckerId is not provided, use the provided default trucker ID
+        if (!truckerId) {
+            defaultTruckerId = "65e61156f838e38d9e0ee7d1"; // Use the provided default trucker ID
+        }
+
+        const cargoData = {
             userId,
             loadingPoint,
             unloadingPoint,
             truckType,
             weight,
             shippingDate,
-            deliveryDate
-        });
+            deliveryDate,
+            truckerId: truckerId || defaultTruckerId
+        };
 
-       
+        const newCargo = await Cargo.create(cargoData);
+
         const savedCargo = await newCargo.save();
 
         res.status(201).json(savedCargo);
     } catch (error) {
-        // Handle errors, for example, validation errors or database errors
+        // Handle errors
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 const getCargoById = async (req, res) => {
     try {

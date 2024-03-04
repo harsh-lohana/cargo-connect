@@ -1,6 +1,6 @@
 const express = require("express");
 const {authMiddleware} = require("../middlewares/auth.miidleware")
-const {signUpUser, logInUser, updateUser, searchUsers} = require("../controllers/user.controllers");
+const {signUpUser, logInUser, updateUser, searchUsers , setRating} = require("../controllers/user.controllers");
 const { setCargo , getCargoById , getAllCargo} = require("../controllers/load.controllers.js");
 
 const router = express.Router();
@@ -12,6 +12,5 @@ router.get("/search", authMiddleware, searchUsers);
 router.post("/cargo", setCargo);
 router.get("/cargo" ,getCargoById);
 router.get("/allcargo" , getAllCargo);
-
-
+router.post("/ratings" ,setRating); 
 module.exports = router;
