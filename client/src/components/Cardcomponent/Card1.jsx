@@ -6,24 +6,7 @@ import axios from "axios";
 const Card = ({ cargo , loggedInUserId }) => {
 
   const handleAccept = async(req, res) => {
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const cargoId = cargo._id; 
-      const payload = {
-        cargoId,
-        loggedInUserId
-      };
-
-      const response = await axios.put("http://localhost:5000/api/user/accept", payload , config);
-      console.log(response.data);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
-    }
+    
 };
 
   return (
@@ -43,8 +26,7 @@ const Card = ({ cargo , loggedInUserId }) => {
         <div>Weight: {cargo.weight}kg</div>
       </div>
       <div className="btn flex justify-between">
-         <Button onClick={handleAccept}>Accept</Button>
-         <Button>Reject</Button>
+         <Button onClick={handleAccept}>Completed</Button>
       </div>
     </div>
   );

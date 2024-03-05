@@ -7,6 +7,7 @@ import Dashboard from "./pages/User/DashBoard/Dashboard";
 import TruckerDashboard from "./pages/Trucker/TruckerDashboard";
 import { Allorders } from "./pages/Trucker/Allorder/Allorders";
 import UserOrders from "./pages/User/DashBoard/UserOrders";
+import { Commitment } from "./pages/Trucker/Commitment/Commitment";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/userorders" element={<UserOrders/>}/> {/* Added closing tag */}
             <Route path="/truckerHome" element={<TruckerDashboard/>}/>
             <Route path="/allorders" element={<Allorders/>}/>
+            <Route path="/commit" element={<Commitment/>}/>
           </Routes>
         </main>
       </div>

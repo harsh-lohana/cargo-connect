@@ -171,5 +171,15 @@ const setRating = async (req, res) => {
   }
 };
 
+const Loggedinuserid = (req,res) =>{
+  try{
+    const userId = req.user.id;
+    res.status(200).json({ userId });
+  }
+  catch(error){
+    console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+  }
+}
 
-module.exports = { signUpUser, logInUser, updateUser, searchUsers , setRating };
+module.exports = { signUpUser, logInUser, updateUser, searchUsers , setRating , Loggedinuserid };

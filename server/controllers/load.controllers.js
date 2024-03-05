@@ -79,6 +79,42 @@ const getAllCargo = async (req, res) => {
 };
 
 
+const acceptCargo = async (req, res) => {
+    console.log(req.body);
+    const { cargoId , loggedInUserId } = req.body
+    try {
+        // const cargoId = req.params.cargoId; 
+        // const loggedInTruckerId = req.body.id; 
+        // Find the cargo by ID
+        const cargo = await Cargo.findById(cargoId);
+        if (!cargo) {
+            return res.status(404).json({ error: "Cargo not found" });
+        }
 
+        cargo.truckerId = loggedInUserId;
 
-module.exports = { setCargo , getCargoById , getAllCargo };
+        
+        const updatedCargo = await cargo.save();
+
+        res.status(200).json(updatedCargo);
+    } catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+const allCargoTruck = async(req,res)=>{
+    const { truckerId } = req.params;
+    console.log(req.params);
+    try{
+        const allCargo = await Cargo.find({ truckerId });
+        res.status(200).json(allCargo);
+    }
+    catch(error){
+        console.log(error);
+        res.status(500).json({error: "kuch gadbad hai"});
+    }
+}
+
+module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck};
