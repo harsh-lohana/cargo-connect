@@ -6,8 +6,9 @@ import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage = () => {
-  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState(2);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,7 +30,7 @@ const SignupPage = () => {
         setLoading(true);
         const { data } = await axios.post(
           "/api/user/signup",
-          { name, email, password },
+          { name, email, password, role },
           config
         );
         toast.success("Signed in!");
@@ -79,6 +80,18 @@ const SignupPage = () => {
             className="mb-2 w-56 h-8"
             onChange={(e) => setEmail(e.target.value)}
           />
+          <label
+            htmlFor="role"
+            className="text-lg font-semibold text-blue-500 bg-yellow-200"
+          >
+            Role
+          </label>
+          <select name="role" id="role"
+            onChange={(e) => setRole(e.target.value)}
+          >
+            <option value="2">Customer</option>
+            <option value="1">Trucker</option>
+          </select>
           <label
             htmlFor="password"
             className="text-lg font-semibold text-blue-500 bg-yellow-200"
