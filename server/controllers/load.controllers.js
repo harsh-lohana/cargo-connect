@@ -11,7 +11,7 @@ const setCargo = async (req, res) => {
             deliveryDate,
             truckerId
         } = req.body;
-        console.log(req.body);
+       // console.log(req.body);
 
         let defaultTruckerId;
 
@@ -39,7 +39,7 @@ const setCargo = async (req, res) => {
     } catch (error) {
         // Handle errors
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -51,7 +51,7 @@ const getCargoById = async (req, res) => {
         const cargo = await Cargo.findById({_id: cargoId});
 
         if (!cargo) {
-            return res.status(404).json({ error: "Cargo not found" });
+            return res.sendStatus(404).json({ error: "Cargo not found" });
         }
 
 
@@ -59,7 +59,7 @@ const getCargoById = async (req, res) => {
     } catch (error) {
         // Handle errors, for example, invalid ID format or database errors
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.sendStatustatus(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -74,7 +74,7 @@ const getAllCargo = async (req, res) => {
     } catch (error) {
     
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -100,7 +100,7 @@ const acceptCargo = async (req, res) => {
     } catch (error) {
         // Handle errors
         console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
 
@@ -117,4 +117,23 @@ const allCargoTruck = async(req,res)=>{
     }
 }
 
-module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck};
+const expectedPay = async (req, res) => {
+    const { cargoId } = req.body;
+    console.log(req.body)
+    console.log(cargoId)
+    try {
+      const cargo = await Cargo.findById(cargoId);
+      if (!cargo) {
+        return res.status(404).json({ error: "Cargo not found" });
+      }
+      const weight = cargo.weight;
+      const price = weight * 100;
+      res.send(price.toString()); // Send the price as a string
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+  };
+  
+
+module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck , expectedPay};

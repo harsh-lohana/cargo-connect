@@ -4,6 +4,8 @@ const cors = require("cors");
 const connectToDB = require("./db");
 const userRouter = require("./routes/user.routes");
 const cargoTypeRouter = require("./routes/cargotype.routes");
+const adminRoutes = require("./routes/admin.routes");
+
 const path = require("path");
 
 dotenv.config();
@@ -18,6 +20,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use("/api/user", userRouter);
 app.use("/api/type",cargoTypeRouter);
+app.use("/api/admin",adminRoutes);
 
 // ---------- depolyment ----------
 
