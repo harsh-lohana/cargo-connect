@@ -15,7 +15,7 @@ export const Allorders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/allcargo");
+        const response = await axios.get("http://localhost:5000/api/user/allcargoP");
         console.log(response.data);
         setCargoList(response.data); 
       } catch (error) {

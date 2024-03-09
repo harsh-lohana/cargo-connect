@@ -64,12 +64,24 @@ const getCargoById = async (req, res) => {
 };
 
 
+const getAllPendingCargo = async (req, res) => {
+    try {
+        
+        const allCargo = await Cargo.find({ status: 0 });
+       
+        res.status(200).json(allCargo);
+    } catch (error) {
+    
+        console.error(error);
+        res.sendStatus(500).json({ error: "Internal Server Error" });
+    }
+};
+
 const getAllCargo = async (req, res) => {
     try {
         
         const allCargo = await Cargo.find();
-
-       
+       console.log(allCargo);
         res.status(200).json(allCargo);
     } catch (error) {
     
@@ -80,29 +92,26 @@ const getAllCargo = async (req, res) => {
 
 
 const acceptCargo = async (req, res) => {
-    console.log(req.body);
-    const { cargoId , loggedInUserId } = req.body
+    //console.log(req.body);
+    const { cargoId, loggedInUserId } = req.body;
     try {
-        // const cargoId = req.params.cargoId; 
-        // const loggedInTruckerId = req.body.id; 
-        // Find the cargo by ID
         const cargo = await Cargo.findById(cargoId);
         if (!cargo) {
             return res.status(404).json({ error: "Cargo not found" });
         }
 
         cargo.truckerId = loggedInUserId;
+        cargo.status = 1; // Set status to 1 when accepted
 
-        
         const updatedCargo = await cargo.save();
 
         res.status(200).json(updatedCargo);
     } catch (error) {
-        // Handle errors
         console.error(error);
         res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
+
 
 const allCargoTruck = async(req,res)=>{
     const { truckerId } = req.params;
@@ -134,6 +143,26 @@ const expectedPay = async (req, res) => {
       res.status(500).json({ error: "Internal Server Error" });
     }
   };
+
+
+  const completed =  async (req,res) => {
+    const { cargoId, loggedInUserId } = req.body;
+    try {
+        const cargo = await Cargo.findById(cargoId);
+        if (!cargo) {
+            return res.status(404).json({ error: "Cargo not found" });
+        }
+
+        cargo.status = 2; // Set status to 2 when completed
+
+        const updatedCargo = await cargo.save();
+
+        res.status(200).json(updatedCargo);
+
+    } catch (error) {
+        console.log(error);
+    }
+  };
   
 
-module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck , expectedPay};
+module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck , expectedPay ,getAllPendingCargo , completed};

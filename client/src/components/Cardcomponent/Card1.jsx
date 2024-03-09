@@ -5,10 +5,33 @@ import axios from "axios";
 
 const Card = ({ cargo , loggedInUserId }) => {
 
-  const handleAccept = async(req, res) => {
-    
+  const handleComplete = async(req, res) => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const cargoId = cargo._id; 
+      const payload = {
+        cargoId,
+        loggedInUserId
+      };
+
+      const response = await axios.put("http://localhost:5000/api/user/complete", payload , config);
+      //console.log(response.data);
+      
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
 };
 
+const mp = new Map([
+  [0, 'pending'],
+  [1, 'Accepted'],
+  [2, 'Completed']
+]);
   return (
     <div className="card">
       <div className="card-row shipping-dates">
@@ -26,7 +49,8 @@ const Card = ({ cargo , loggedInUserId }) => {
         <div>Weight: {cargo.weight}kg</div>
       </div>
       <div className="btn flex justify-between">
-         <Button onClick={handleAccept}>Completed</Button>
+         <Button onClick={handleComplete}>Completed</Button>
+         <div>Status : {mp.get(cargo.status)}</div>
       </div>
     </div>
   );

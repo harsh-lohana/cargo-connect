@@ -26,6 +26,11 @@ const Card = ({ cargo , loggedInUserId }) => {
     }
 };
 
+const mp = new Map([
+  [0, 'Pending'],
+  [1, 'Accepted'],
+  [2, 'Completed']
+]);
   return (
     <div className="card">
       <div className="card-row shipping-dates">
@@ -44,7 +49,7 @@ const Card = ({ cargo , loggedInUserId }) => {
       </div>
       <div className="btn flex justify-between">
          <Button onClick={handleAccept}>Accept</Button>
-         <Button>Reject</Button>
+        <div>status :{mp.get(cargo.status)} </div>
       </div>
     </div>
   );
