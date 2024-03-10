@@ -134,4 +134,52 @@ const searchUsers = async (req, res) => {
   }
 };
 
-module.exports = { signUpUser, logInUser, updateUser, searchUsers };
+const setRating = async (req, res) => {
+  const { userId, rating } = req.body;
+
+  try {
+    // Validate rating
+    if (rating > 5 || rating < 0) {
+      return res.status(400).json({ error: 'Rating must be between 0 and 5.' });
+    }
+
+    // Find the user by userId
+    const user = await User.findById(userId);
+
+    // Check if the user exists
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Check if the user is a trucker (role === 1)
+    if (user.role !== 1) {
+      return res.status(403).json({ error: 'Rating is only applicable for truckers (role 1).' });
+    }
+
+    // Push the new rating to the ratings array
+    user.rating.push(rating);
+
+    // Save the updated user
+    await user.save();
+
+    // Send a success response
+    res.status(200).json({ message: 'Rating updated successfully.' });
+  } catch (error) {
+    // Handle any errors
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error.' });
+  }
+};
+
+const Loggedinuserid = (req,res) =>{
+  try{
+    const userId = req.user.id;
+    res.status(200).json({ userId });
+  }
+  catch(error){
+    console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+  }
+}
+
+module.exports = { signUpUser, logInUser, updateUser, searchUsers , setRating , Loggedinuserid };

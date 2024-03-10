@@ -21,7 +21,18 @@ const userSchema = new mongoose.Schema({
     role: {
         type: Number,
         default: 1
-    }
+    },
+    rating: [{
+        type: Number,
+        min: 0,
+        max: 5,
+        validate: {
+            validator: function() {
+                return this.role === 1;
+            },
+            message: 'Rating is only applicable for truckers (role 1).'
+        }
+    }]
 }, {timestamps: true});
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

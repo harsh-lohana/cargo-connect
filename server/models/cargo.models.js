@@ -4,12 +4,10 @@ const cargoSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
     },
     truckerId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
     },
     loadingPoint: {
         type: String,
@@ -34,7 +32,12 @@ const cargoSchema = new mongoose.Schema({
     deliveryDate: {
         type: String,
         required: true
-    }
+    },
+    //0 -> pending 1-> accepted 2-> completed
+    status: {
+        type: Number,
+        default: 0
+    },
 }, {timestamps: true});
 
 const Cargo = mongoose.model("Cargo", cargoSchema);

@@ -1,57 +1,79 @@
 import React, { useState, useEffect } from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Card from '../../../components/Cardcomponent/UserCard'
+import { Button } from '@mui/material';
+import "../DashBoard/Styles.css";
 
-const UserOrders = () => {
-  const [cargo, setCargo] = useState([]);
+export const UserOrders = () => {
+  const [cargoList, setCargoList] = useState([]);
+  const [filteredCargoList, setFilteredCargoList] = useState([]);
+  const [prices, setPrices] = useState([]);
+  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const loggedInUserId = user.id;
 
+  const fetchPrice = async (cargoId) => {
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    try {
+      const response = await axios.post("http://localhost:5000/api/admin/expectedPay", { cargoId }, config);
+      return response.data;
+    } catch (error) {
+      console.error("Error in fetching price:", error);
+      return null;
+    }
+  };
+  
   useEffect(() => {
-    const fetchCargo = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('/allcargo'); // Fetching data from the getAllCargo route
-        setCargo(response.data);
+        const response = await axios.get("http://localhost:5000/api/user/allcargo");
+        setCargoList(response.data);
+        // Filter cargo list for the logged-in user
+        setFilteredCargoList(response.data.filter(cargo => cargo.userId === loggedInUserId));
       } catch (error) {
-        console.error('Error fetching cargo:', error);
+        console.error("Error fetching cargo data:", error);
       }
     };
 
-    fetchCargo();
-  }, []);
+    fetchData();   
+  }, [loggedInUserId]); // Include loggedInUserId in the dependency array
+
+  useEffect(() => {
+    const fetchPrices = async () => {
+      try {
+        const prices = await Promise.all(filteredCargoList.map(cargo => fetchPrice(cargo._id)));
+        setPrices(prices);
+      } catch (error) {
+        console.error("Error fetching prices:", error);
+      }
+    };
+
+    if (filteredCargoList.length > 0) {
+      fetchPrices();
+    }
+  }, [filteredCargoList]);
+
+  const navigate = useNavigate();
+
+  const handleCommitment = () =>{
+    navigate("/commit");
+  }
 
   return (
-    <div>
-      <Card sx={{ 
-        maxWidth: 800,// Adjust as needed
-        margin: '0 auto', // Center the card horizontally
-        marginTop: 20, // Add some top margin
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Add a subtle shadow
-        borderRadius: 0, // Add rounded corners
-      }}>
-        <CardContent>
-          <Typography variant="h5" component="div">
-            Cargo Details
-          </Typography>
-          <ul>
-            {cargo.map(item => (
-              <li key={item._id}>
-                <div>
-                  <strong>Loading Point:</strong> {item.loadingPoint}<br />
-                  <strong>Unloading Point:</strong> {item.unloadingPoint}<br />
-                  <strong>Truck Type:</strong> {item.truckType}<br />
-                  <strong>Truck Type:</strong> {item.truckType}<br />
-                  <strong>Truck Type:</strong> {item.truckType}<br />
-
-                  {/* Render other cargo details as needed */}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
+    <div className='all'>
+      <h1 style={{ textAlign: 'center', fontWeight: 700 }}>Cargo List</h1>
+      <div className="card-list">
+        {filteredCargoList.map((cargo, index) => (
+          <div key={cargo._id}>
+            <Card cargo={cargo} loggedInUserId={loggedInUserId} />
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default UserOrders;
+}

@@ -6,11 +6,12 @@ import { Toaster } from "react-hot-toast";
 import Dashboard from "./pages/User/DashBoard/Dashboard";
 import TruckerDashboard from "./pages/Trucker/TruckerDashboard";
 import { Allorders } from "./pages/Trucker/Allorder/Allorders";
-import UserOrders from "./pages/User/DashBoard/UserOrders";
+import { UserOrders } from "./pages/User/DashBoard/UserOrders";
+import { Commitment } from "./pages/Trucker/Commitment/Commitment";
 
 const App = () => {
   return (
-    <div className="flex justify-center bg-yellow-200 min-h-screen">
+    <div className="flex justify-center bg-blue-200 min-h-screen">
       <div className="flex flex-col w-[90%] justify-items-center">
         <main>
           <Toaster/>
@@ -19,9 +20,10 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/cargoconnect" element={<Dashboard/>}/> 
-            <Route path="/userorders" element={<UserOrders/>}/> {/* Added closing tag */}
             <Route path="/truckerHome" element={<TruckerDashboard/>}/>
             <Route path="/allorders" element={<Allorders/>}/>
+            <Route path="/commit" element={<Commitment/>}/>
+            <Route path="/userorders" element={<UserOrders/>}/> 
           </Routes>
         </main>
       </div>
