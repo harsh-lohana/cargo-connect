@@ -28,9 +28,20 @@ const LoginPage = () => {
         config
       );
       toast.success("Logged in!");
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage.setItem("loggedInUser", JSON.stringify(data)); // Assuming the user role is stored in 'data.role'
       setLoading(false);
-      navigate("/");
+  
+      // Redirect based on user role
+      if (data.role === 2) {
+        // Redirect to cargoconnect if user role is 2
+        navigate("/cargoconnect");
+      } else if (data.role === 1) {
+        // Redirect to allorders if user role is 1
+        navigate("/allorders");
+      } else {
+        // Default redirection (if user role is neither 1 nor 2)
+        navigate("/");
+      }
     } catch (error) {
       setError(error.response.data.message);
       toast.error("Invalid email or password!");
