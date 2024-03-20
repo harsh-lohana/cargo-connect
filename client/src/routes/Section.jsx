@@ -9,7 +9,7 @@ import Dashboard from "../pages/User/DashBoard/Dashboard";
 import TruckerDashboard from "../pages/Trucker/TruckerDashboard";
 import {Allorders} from "../pages/Trucker/Allorder/Allorders";
 import {UserOrders} from "../pages/User/DashBoard/UserOrders";
-import Commitment from "../pages/Trucker/Commitment/Commitment";
+import {Commitment} from "../pages/Trucker/Commitment/Commitment";
 
 const ProtectedRoute = ({ element, role }) => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
