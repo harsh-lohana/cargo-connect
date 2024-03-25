@@ -10,6 +10,7 @@ import TruckerDashboard from "../pages/Trucker/TruckerDashboard";
 import {Allorders} from "../pages/Trucker/Allorder/Allorders";
 import {UserOrders} from "../pages/User/DashBoard/UserOrders";
 import {Commitment} from "../pages/Trucker/Commitment/Commitment";
+import FeedBack  from "../pages/Feedback/FeedBack";
 
 const ProtectedRoute = ({ element, role }) => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -73,6 +74,10 @@ const Router = () => {
         {
           path: '/signup',
           element: <SignupPage />,
+        },
+        {
+          path: '/feed',
+          element: <FeedBack />,
         },
       ],
     },
