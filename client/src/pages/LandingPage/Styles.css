@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: "Reem Kufi", sans-serif !important; */
+  
+}
+
+
+
+@font-face {
+  font-family: 'Assistant';
+  src: url('./fonts/Assistant-Regular.woff2') format('woff2'),
+       url('./fonts/Assistant-Regular.woff') format('woff');
+  /* Add more font weights and styles if needed */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.App {
+  min-height: 100vh;
+  width: 85vw;
+  max-width: 1900px;
+  margin: 0rem auto;
+}
+
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: #fff;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 90px;
+}
+
+.navbar-menu-container {
+  display: none;
+}
+
+.navbar-title {
+  font-weight: bold;
+  text-align: left;
+  color: black;
+  font-size: 1.5rem;
+  padding-right: 70rem;
+}
+
+.navbar-links-container {
+  display: flex;
+  justify-content: space-between; /* or justify-content: center; */
+  align-items: center; /* Optional: align items vertically */
+  margin-right: 3rem;
+}
+
+.navbar-links-container a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding-right: 1rem; /* Adjust the value as needed */
+}
+
+.primary-button {
+  padding: 0.9rem 1.75rem;
+  background-color: white;
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.contact-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: 30vh; /* Set the height to full viewport height */
+}
+
+/* .contact-form-container {
+  margin-top: 20px; /* Add some spacing from the headings */
+
+
+
+.navbar-cart-icon {
+  font-size: 1.15rem;
+}
+
+.primary-button:hover {
+  background-color: rgb(234, 234, 234);
+}
+
+.navbar-menu-container svg {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.home-banner-container {
+  position: relative;
+}
+
+.home-bannerImage {
+  width: 100%;
+}
+
+.home-image-section,
+.work-section-bottom {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.work-section-info p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.first {
+  background-image: url("https://nevadanewsgroup.media.clients.ellingtoncms.com/img/photos/2021/03/15/Logistics1_t670.jpg?b3f6a5d7692ccc373d56e40cf708e3fa67d9af9d");
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent image repetition */
+  height: 100vh; /* Cover the entire viewport vertically */
+  width: 100%; /* Cover the entire viewport horizontally */
+}
+
+.primary-heading{
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold; /* Make the font bold */
+  color: #220000; /* Change the text color */
+  text-align: center;
+  font-family: "Assistant", sans-serif;
+}
+
+.primary-subheading{
+  font-size: 1.5rem; /* Adjust font size as needed */
+  font-weight: bold; /* Make the font bold */
+  color: #220000; /* Change the text color */
+  text-align: center;
+  font-family: "Assistant", sans-serif;
+}
+
+.primary-text {
+  font-size: 1.6rem; /* Adjust font size as needed */
+  line-height: 1.5; /* Adjust line height as needed */
+  text-align: center;
+  color: #333; /* Change the text color */
+  margin-top: 20px; /* Add margin from the top */
+}
+
+.testimonial-section-bottom {
+  display: flex; /* Use flexbox layout */
+  align-items: center; /* Align items vertically */
+  margin-top: 20px; /* Add margin from the top */
+}
+
+.testimonial-section-bottom img {
+  width: 90px; /* Adjust image width as needed */
+  height: 90px; /* Adjust image height as needed */
+  border-radius: 50%; /* Make the image round */
+  margin-right: 15px; /* Add margin to the right of the image */
+}
+
+.testimonial-section-bottom p {
+  font-size: 1.4rem; /* Adjust font size as needed */
+  color: #333; /* Change the text color */
+}
+
+.page-title{
+  font-size: 2.5rem; /* Adjust font size as needed */
+  font-weight: bold; /* Make the font bold */
+  color: #0d001c; /* Change the text color */
+  padding-left: 2cm;
+  text-align: left;
+  font-family: "Assistant", sans-serif;
+}
+
+.page-subtitle{
+  font-size: 1.5rem; /* Adjust font size as needed */
+  font-weight: bold; /* Make the font bold */
+  color: #291a1a; /* Change the text color */
+  text-align: left;
+  padding-left: 2cm;
+  font-family: "Assistant", sans-serif;
+}
+
+.footer-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: 25vh; /* Set the height to full viewport height */
+}
+
+.footer-section-one,
+.footer-section-two {
+  width: 80%; /* Adjust width as needed */
+  max-width: 800px; /* Maximum width for better responsiveness */
+  margin-bottom: 20px; /* Add some spacing between sections */
+}
+
+.footer-icons {
+  display: flex;
+  gap: 10px; /* Add some space between icons */
+}
+
+.footer-section-columns {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; /* Add some space between spans */
+}
+
+.login-button,
+.signup-button {
+  padding: 10px 30px; /* Adjust padding as needed */
+  font-size: 16px; /* Adjust font size as needed */
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-right: 1px;
+  border: none;
+  border-radius: 5px;
+  background-color: #67c99e; /* Change to desired color */
+  color: #fff; /* Change to desired text color */
+  cursor: pointer;
+}
+/* Adjust styles for individual spans if needed */
