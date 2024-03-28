@@ -5,6 +5,7 @@ import axios from "axios";
 
 const Card = ({ cargo, loggedInUserId }) => {
   const [price, setPrice] = useState(null);
+  const [paymentButtonVisible, setPaymentButtonVisible] = useState(false);
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -29,30 +30,20 @@ const Card = ({ cargo, loggedInUserId }) => {
     fetchPrice();
   }, [cargo._id]);
 
-  const handleAccept = async (req, res) => {
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const cargoId = cargo._id;
-      const payload = {
-        cargoId,
-        loggedInUserId,
-      };
+  useEffect(() => {
+    // Show payment button only if cargo status is 2 (completed)
+    setPaymentButtonVisible(cargo.status === 2);
+  }, [cargo.status]);
 
-      const response = await axios.put(
-        "http://localhost:5000/api/user/accept",
-        payload,
-        config
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
-  };
+  const handlePayment = ((req,res)=>{
+
+  })
+
+  const mp = new Map([
+    [0, "pending"],
+    [1, "Accepted"],
+    [2, "Completed"],
+  ]);
 
   return (
     <div className="card">
@@ -71,12 +62,17 @@ const Card = ({ cargo, loggedInUserId }) => {
         <div>Weight: {cargo.weight}kg</div>
       </div>
 
-      <div className="card-row truck-details">Price: {price}</div>
+      <div>
+        <div className="card-row truck-details">Price: {price}</div>
+        <div>Status: {mp.get(cargo.status)}</div>
+      </div>
 
-      {/* <div className="btn flex justify-between">
-         <Button onClick={handleAccept}>Accept</Button>
-         <Button>Reject</Button>
-      </div> */}
+      {/* Render payment button if status is completed */}
+      {paymentButtonVisible && (
+        <div className="btn flex justify-between">
+          <Button onClick={handlePayment}>Make Payment</Button>
+        </div>
+      )}
     </div>
   );
 };

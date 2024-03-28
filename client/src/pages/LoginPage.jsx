@@ -4,6 +4,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import image from "../pages/LandingPage/Assets/loginTruck.jpg";
+import { TextField, Button, Typography } from "@mui/material";
+import "../pages/User/DashBoard/Styles.css";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -28,9 +31,20 @@ const LoginPage = () => {
         config
       );
       toast.success("Logged in!");
-      localStorage.setItem("userInfo", JSON.stringify(data));
+      localStorage.setItem("loggedInUser", JSON.stringify(data)); // Assuming the user role is stored in 'data.role'
       setLoading(false);
-      navigate("/");
+  
+      // Redirect based on user role
+      if (data.role === 2) {
+        // Redirect to cargoconnect if user role is 2
+        navigate("/cargoconnect");
+      } else if (data.role === 1) {
+        // Redirect to allorders if user role is 1
+        navigate("/allorders");
+      } else {
+        // Default redirection (if user role is neither 1 nor 2)
+        navigate("/");
+      }
     } catch (error) {
       setError(error.response.data.message);
       toast.error("Invalid email or password!");
@@ -39,70 +53,66 @@ const LoginPage = () => {
     }
   };
 
-  const revealTestUSer = () => {
+  const revealTestUser = () => {
     setEmail("test@test.com");
     setPassword("test");
     toast.success("Test user revealed!");
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-semibold text-blue-500 bg-yellow-200 my-3">
+    <div className="main" style={{background : "black"}}>
+    <div className="overlay"></div>
+    <img src={image} style={{ filter: "blur(3px)" }}/>
+    <div className="content">
+    <div style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <Typography variant="h4" color="white" style={{ marginBottom: "1rem" ,fontFamily: "Roboto, sans-serif" }}>
         {loading ? "Loading..." : "Login"}
-      </h1>
-      {loading ? <Loader /> : null}
-      <form action="" className="flex flex-col gap-2" onSubmit={submitHandler}>
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="email"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            E-Mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="mb-2 w-56 h-8"
-          />
-          <label
-            htmlFor="password"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mb-2 w-56 h-8"
-          />
-        </div>
-        <button
+      </Typography>
+      {loading && <Loader />}
+      <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }} onSubmit={submitHandler}>
+        <TextField
+          id="email"
+          type="email"
+          label="E-Mail"
+          placeholder="Enter e-mail"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: 300, color:"white" }}
+        />
+        <TextField
+          id="password"
+          type="password"
+          label="Password"
+          placeholder="Enter password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ width: 300 , color: "white"}}
+        />
+        <Button
           type="submit"
-          className="border-solid border-2 bg-yellow-300 font-semibold border-blue-500 text-blue-700 rounded-md py-1 px-2 my-2"
+          variant="contained"
+          color="primary"
+          style={{ width: 80 }}
         >
           Login
-        </button>
-        <button
-          onClick={revealTestUSer}
-          type="button"
-          className="border-solid border-2 bg-yellow-300 font-semibold border-blue-500 text-blue-700 rounded-md py-1 px-2"
+        </Button>
+        <Button
+          onClick={revealTestUser}
+          variant="contained"
+          color="primary"
+          style={{ width: 200}}
         >
           Reveal test user
-        </button>
-        <p className="font-semibold text-blue-700 rounded-md">
-          New to Blog It?
-          <Link to="/signup" className="underline text-blue-800">
-            {" "}
+        </Button>
+        <Typography variant="body1" color="white">
+          Don't have an account?{" "}
+          <Link to="/signup" style={{ textDecoration: "underline", color: "white", cursor: "pointer" }}>
             Signup
           </Link>
-        </p>
+        </Typography>
       </form>
+      </div>
+    </div>
     </div>
   );
 };

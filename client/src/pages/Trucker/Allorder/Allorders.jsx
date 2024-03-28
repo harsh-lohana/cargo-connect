@@ -5,7 +5,8 @@ import { useState , useEffect  } from 'react';
 import "../Allorder/styles.css"
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-
+import BaseNavbar from '../../../components/Navbars/BaseNavbar';
+import Footer from '../../LandingPage/Components/Footer';
 
 export const Allorders = () => {
 
@@ -15,7 +16,7 @@ export const Allorders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/allcargo");
+        const response = await axios.get("http://localhost:5000/api/user/allcargoP");
         console.log(response.data);
         setCargoList(response.data); 
       } catch (error) {
@@ -38,14 +39,15 @@ export const Allorders = () => {
 
   return (
     <div className='all'>
-      <h1 style={{ textAlign: 'center', fontWeight: 700 }}>Cargo List</h1>
+      <BaseNavbar/>
+      <h1 style={{ textAlign: 'center', fontWeight: 700 }}>CARGO LIST</h1>
       <div className="card-list">
         {cargoList.map((cargo) => (
           <Card key={cargo._id} cargo={cargo} loggedInUserId={loggedInUserId} />
           
         ))}
       </div>
-      <Button onClick={handleCommitment}>My commitment</Button>
+      <Footer/>
     </div>
   );
 }

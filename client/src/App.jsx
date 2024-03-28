@@ -1,4 +1,4 @@
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
 import { Routes, Route } from "react-router-dom";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
@@ -11,8 +11,8 @@ import { Commitment } from "./pages/Trucker/Commitment/Commitment";
 
 const App = () => {
   return (
-    <div className="flex justify-center bg-blue-200 min-h-screen">
-      <div className="flex flex-col w-[90%] justify-items-center">
+    <div>
+      <div className="flex flex-col w-[100%] justify-items-center">
         <main>
           <Toaster/>
           <Routes>

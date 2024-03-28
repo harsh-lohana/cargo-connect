@@ -1,27 +1,66 @@
 .form-group {
-display: flex;
-align-items: center;
-margin-top: 10px;
-  }
-  
-  .label {
-    margin-right: 10px; 
-    margin-bottom: 17px; 
-    font-size: 1.5rem;
-  }
-  
-  .custom-textfield {
-    width: 100%; 
-    margin-bottom: 15px;
-  }
-  
-  .custom-textfield input::placeholder {
-    color: #534040; 
-    font-size: .9em; 
-  }
-  
-  .custom-textfield input { 
-    padding: 8px;
-  border-radius: 20%;
-  width: 350px; 
-  }
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.label {
+  margin-right: 10px;
+  margin-bottom: 17px;
+  font-size: 1.5rem;
+}
+
+.custom-textfield {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.custom-textfield input::placeholder {
+  color: #534040;
+  font-size: 0.9em;
+}
+
+.custom-textfield input {
+  padding: 8px;
+  border-radius: 8px; /* Adjusted border radius */
+  width: 100%; /* Adjusted width to fit the container */
+  border: 1px solid #ccc; /* Added border for better visibility */
+}
+
+.custom-select {
+  width: 120px;
+  margin-left: 10px;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}

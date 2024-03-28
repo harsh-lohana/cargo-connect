@@ -4,10 +4,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import image from "../pages/LandingPage/Assets/loginTruck.jpg";
+import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
 
 const SignupPage = () => {
-  const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [role, setRole] = useState(2);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -29,7 +32,7 @@ const SignupPage = () => {
         setLoading(true);
         const { data } = await axios.post(
           "/api/user/signup",
-          { name, email, password },
+          { name, email, password, role },
           config
         );
         toast.success("Signed in!");
@@ -46,80 +49,92 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-semibold text-blue-500 bg-yellow-200 my-3">
-        {loading ? "Loading..." : "Signup"}
-      </h1>
-      {loading ? <Loader /> : null}
-      <form action="" className="flex flex-col gap-2" onSubmit={submitHandler}>
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="email"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter name"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label
-            htmlFor="email"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            E-Mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter e-mail"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label
-            htmlFor="password"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter password"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label
-            htmlFor="confirm-password"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Confirm Password
-          </label>
-          <input
-            id="confirm-password"
-            type="password"
-            placeholder="Confirm password"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+    <div className="main">
+      <div className="overlay"></div>
+      <img src={image} style={{ filter: "blur(3px)" }}/>
+      <div className="content">
+        <div className="h-screen flex flex-col justify-center items-center">
+          <Typography variant="h4" color="white" className="mb-3">
+            {loading ? "Loading..." : "Signup"}
+          </Typography>
+          {loading ? <Loader /> : null}
+          <form action="" className="flex flex-col gap-2" onSubmit={submitHandler}>
+            <div className="flex flex-col gap-2">
+              <Typography variant="subtitle1" color="white" className="bg-transparent">
+                Name
+              </Typography>
+                <TextField
+                id="name"
+                type="text"
+                placeholder="Enter name"
+                className="mb-2"
+                InputProps={{
+                  style: { borderColor: "white" },
+                }}
+              />
+              <Typography variant="subtitle1" color="white" className="bg-transparent">
+                E-Mail
+              </Typography>
+              <TextField
+                id="email"
+                type="email"
+                placeholder="Enter e-mail"
+                className="mb-2"
+                onChange={(e) => setEmail(e.target.value)}
+               
+              />
+              <Typography variant="subtitle1" color="white" className="bg-transparent">
+                Role
+              </Typography>
+              <Select
+                name="role"
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="mb-2"
+              >
+                <MenuItem value={2}>Customer</MenuItem>
+                <MenuItem value={1}>Trucker</MenuItem>
+              </Select>
+              <Typography variant="subtitle1" color="white" className="bg-transparent" >
+                Password
+              </Typography>
+              <TextField
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                className="mb-2"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Typography variant="subtitle1" color="white" className="bg-transparent">
+                Confirm Password
+              </Typography>
+              <TextField
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm password"
+                className="mb-2"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="my-2"
+            >
+              Signup
+            </Button>
+            <Typography variant="subtitle1" color="white" className="font-semibold">
+              Already a user?
+              <Link to="/login" className="underline">
+                {" "}
+                Login
+              </Link>
+            </Typography>
+          </form>
         </div>
-        <button
-          type="submit"
-          className="border-solid border-2 bg-yellow-300 font-semibold border-blue-500 text-blue-700 rounded-md py-1 px-2 my-2"
-        >
-          Signup
-        </button>
-        <p className="font-semibold text-blue-700 rounded-md">
-          Already a user?
-          <Link to="/login" className="underline text-blue-800">
-            {" "}
-            Login
-          </Link>
-        </p>
-      </form>
+      </div>
     </div>
   );
 };
