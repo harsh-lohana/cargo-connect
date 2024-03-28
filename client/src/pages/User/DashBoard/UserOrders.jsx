@@ -4,6 +4,7 @@ import axios from 'axios';
 import Card from '../../../components/Cardcomponent/UserCard'
 import { Button } from '@mui/material';
 import "../DashBoard/Styles.css";
+import BaseNavbar from '../../../components/Navbars/BaseNavbar';
 
 export const UserOrders = () => {
   const [cargoList, setCargoList] = useState([]);
@@ -66,6 +67,7 @@ export const UserOrders = () => {
 
   return (
     <div className='all'>
+      <BaseNavbar/>
       <h1 style={{ textAlign: 'center', fontWeight: 700 }}>Cargo List</h1>
       <div className="card-list">
         {filteredCargoList.map((cargo, index) => (

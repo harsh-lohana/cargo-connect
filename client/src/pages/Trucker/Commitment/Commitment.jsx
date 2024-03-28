@@ -27,7 +27,7 @@ export const Commitment = () => {
 
   return (
     <div className='all'>
-    <h1 style={{ textAlign: 'center', fontWeight: 700 }}>MY pending works</h1>
+    <h1 style={{ textAlign: 'center', fontWeight: 700 }}>My pending works</h1>
     <div className="card-list">
       {cargoList.map((cargo) => (
         <Card key={cargo._id} cargo={cargo} loggedInUserId={loggedInUserId} />

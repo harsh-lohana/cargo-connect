@@ -1,5 +1,4 @@
 import React from "react";
-import Logo from "../Assets/logo.webp";
 import { BsTwitter } from "react-icons/bs";
 import { SiLinkedin } from "react-icons/si";
 import { BsYoutube } from "react-icons/bs";
@@ -9,9 +8,7 @@ import "../Styles.css"
 const Footer = () => {
   return (
     <div className="footer-wrapper">
-      <div className="footer-section-one">
-        <div className="footer-logo-container">
-        </div>
+      {/* <div className="footer-section-one">
         <div className="footer-icons">
           <BsTwitter />
           <SiLinkedin />
@@ -32,6 +29,9 @@ const Footer = () => {
           <span>Terms & Conditions</span>
           <span>Privacy Policy</span>
         </div>
+      </div> */}
+      <div className="footer-made-by">
+        <span>Made by Mridul, Harsh, and Ayushman</span>
       </div>
     </div>
   );

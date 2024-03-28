@@ -4,7 +4,9 @@ import Testimonial from "./Components/Testimonial";
 import Contact from "./Components/Contact";
 import Footer from "./Components/Footer.jsx";
 import data from './Components/TestimonialData.json'
+import About from "./Components/About.jsx";
 import Work from './Components/Work.jsx'
+import HomeNavbar from '../../components/Navbars/HomeNavbar.jsx'
 
 function LandingPage() {
   return (
@@ -12,6 +14,7 @@ function LandingPage() {
       <div className= "first">
       <Home />
       </div>
+      <div className="about"> <About /></div>
       <Work/>
       <Testimonial  testimonialData =  {data}/>
       <Contact />
