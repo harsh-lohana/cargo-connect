@@ -4,6 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
+import image from "../pages/LandingPage/Assets/loginTruck.jpg";
+import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
 
 const SignupPage = () => {
   const [name, setName] = useState("");

@@ -3,9 +3,8 @@ import "../Cardcomponent/styles.css";
 import { Button } from "@mui/material";
 import axios from "axios";
 
-const Card = ({ cargo , loggedInUserId }) => {
-
-  const handleAccept = async(req, res) => {
+const Card = ({ cargo, loggedInUserId }) => {
+  const handleAccept = async () => { 
     try {
       const config = {
         headers: {
@@ -21,16 +20,17 @@ const Card = ({ cargo , loggedInUserId }) => {
       const response = await axios.put("http://localhost:5000/api/user/accept", payload , config);
       console.log(response.data);
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Internal Server Error" });
+      console.error(error);
     }
-};
+  };
 
-const mp = new Map([
-  [0, 'Pending'],
-  [1, 'Accepted'],
-  [2, 'Completed']
-]);
+
+  const mp = new Map([
+    [0, 'Pending'],
+    [1, 'Accepted'],
+    [2, 'Completed']
+  ]);
+
   return (
     <div className="card">
       <div className="card-row shipping-dates">
@@ -47,10 +47,12 @@ const mp = new Map([
         <div>Truck Type: {cargo.truckType}</div>
         <div>Weight: {cargo.weight}kg</div>
       </div>
+      
       <div className="btn flex justify-between">
-         <Button onClick={handleAccept}>Accept</Button>
-        <div>status :{mp.get(cargo.status)} </div>
+        <Button onClick={handleAccept}>Accept</Button>
       </div>
+
+      <div>Status: {mp.get(cargo.status)}</div>
     </div>
   );
 };

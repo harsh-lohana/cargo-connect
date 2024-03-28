@@ -77,20 +77,6 @@ const getAllPendingCargo = async (req, res) => {
     }
 };
 
-const getAllCargo = async (req, res) => {
-    try {
-        
-        const allCargo = await Cargo.find();
-       console.log(allCargo);
-        res.status(200).json(allCargo);
-    } catch (error) {
-    
-        console.error(error);
-        res.sendStatus(500).json({ error: "Internal Server Error" });
-    }
-};
-
-
 const acceptCargo = async (req, res) => {
     //console.log(req.body);
     const { cargoId, loggedInUserId } = req.body;
@@ -112,12 +98,45 @@ const acceptCargo = async (req, res) => {
     }
 };
 
+const getAllCargo = async (req, res) => {
+    try {
+        const allAcceptedCargo = await Cargo.find(); 
+        res.status(200).json(allAcceptedCargo);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
+const rejectCargo = async (req, res) => {
+    //console.log(req.body);
+    const { cargoId, loggedInUserId } = req.body;
+    try {
+        const cargo = await Cargo.findById(cargoId);
+        if (!cargo) {
+            return res.status(404).json({ error: "Cargo not found" });
+        }
+
+        cargo.truckerId = loggedInUserId;
+        cargo.status = 0; // Set status to 0 when rejected
+
+        const updatedCargo = await cargo.save();
+
+        res.status(200).json(updatedCargo);
+
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500).json({ error: "Internal Server Error" });
+    }
+};
+
 
 const allCargoTruck = async(req,res)=>{
     const { truckerId } = req.params;
     console.log(req.params);
     try{
-        const allCargo = await Cargo.find({ truckerId });
+        const allCargo = await Cargo.find({ truckerId, status: 1  });
         res.status(200).json(allCargo);
     }
     catch(error){
@@ -162,7 +181,9 @@ const expectedPay = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+
+
   };
   
 
-module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , allCargoTruck , expectedPay ,getAllPendingCargo , completed};
+module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , rejectCargo,  allCargoTruck , expectedPay ,getAllPendingCargo , completed};
