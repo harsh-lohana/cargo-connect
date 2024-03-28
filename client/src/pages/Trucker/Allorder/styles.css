@@ -3,13 +3,17 @@
     border-radius: 10px;
     box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
     padding: 20px;
-    margin: 10px auto; /* Set auto margin to center horizontally */
-    max-width: 600px; /* Increase the max-width as needed */
+    margin: 10px auto;
+    max-width: 600px;
+    background: rgb(206, 218, 231);
     display: flex;
-    flex-direction: column; /* Change to column layout */
-   background: rgb(233, 176, 71);
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out; /* Add transition for smoother movement */
 }
 
+.card:hover {
+    transform: translateY(-5px); /* Move the card 5px up when hovered */
+}
 
 .card .card-image {
     max-width: 60%;
@@ -19,15 +23,23 @@
     margin-right: 20px;
 }
 
-.card .card-title {
+.card .card-title,
+.card .card-text,
+.card .shipping-dates,
+.card .location-points,
+.card .truck-details {
     font-family: Arial, sans-serif;
+    color: hsl(0, 0%, 30%);
+}
+
+.card .card-title {
     margin: 0;
-    color: hsl(0, 0%, 20%);
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 .card .card-text {
-    font-family: Arial, sans-serif;
-    color: hsl(0, 0%, 30%);
+    font-size: 1rem;
 }
 
 /* Add new styles for rows */
@@ -41,10 +53,27 @@
     flex: 1;
 }
 
-/* Adjust specific styling for each row */
-.card .shipping-dates,
-.card .location-points,
-.card .truck-details {
-    font-family: Arial, sans-serif;
-    color: hsl(0, 0%, 30%);
+.login-button,
+.signup-button {
+padding-top: 10px;
+  padding: 10px 30px; /* Adjust padding as needed */
+  font-size: 16px; /* Adjust font size as needed */
+  margin-top: 50px;
+  margin-left: 30px;
+  margin-right: 1px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c97167; /* Change to desired color */
+  color: #fff; /* Change to desired text color */
+  cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the gap between buttons as needed */
+  }
+
+  .login-button:hover,
+.signup-button:hover {
+  background-color: #0056b3; /* Change to desired hover color */
 }
