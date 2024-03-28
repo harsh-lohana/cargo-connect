@@ -97,6 +97,18 @@ const acceptCargo = async (req, res) => {
         res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
+
+const getAllCargo = async (req, res) => {
+    try {
+        const allAcceptedCargo = await Cargo.find(); 
+        res.status(200).json(allAcceptedCargo);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500).json({ error: "Internal Server Error" });
+    }
+};
+
+
 const rejectCargo = async (req, res) => {
     //console.log(req.body);
     const { cargoId, loggedInUserId } = req.body;
@@ -118,18 +130,6 @@ const rejectCargo = async (req, res) => {
         res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
-
-const getAllCargo = async (req, res) => {
-    try {
-        const allAcceptedCargo = await Cargo.find(); 
-        res.status(200).json(allAcceptedCargo);
-    } catch (error) {
-        console.error(error);
-        res.sendStatus(500).json({ error: "Internal Server Error" });
-    }
-};
-
-
 
 
 const allCargoTruck = async(req,res)=>{

@@ -5,26 +5,6 @@ import axios from "axios";
 
 const Card = ({ cargo , loggedInUserId }) => {
 
-  const handleReject = async () => { // Removed req, res parameters from handleAccept and handleReject
-    try {
-      const config = {
-        headers: {
-          "Content-type": "application/json",
-        },
-      };
-      const cargoId = cargo._id; 
-      const payload = {
-        cargoId,
-        loggedInUserId
-      };
-
-      const response = await axios.put("http://localhost:5000/api/user/reject", payload , config);
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   const handleComplete = async(req, res) => {
     try {
       const config = {
@@ -70,8 +50,6 @@ const mp = new Map([
       </div>
       <div className="btn flex justify-between">
          <Button onClick={handleComplete}>Completed</Button>
-
-         <Button onClick={handleReject}>Reject</Button>
          <div>Status : {mp.get(cargo.status)}</div>
       </div>
     </div>
