@@ -1,7 +1,7 @@
 const express = require("express");
 const {authMiddleware} = require("../middlewares/auth.miidleware")
 const {signUpUser, logInUser, updateUser, searchUsers , setRating , Loggedinuserid} = require("../controllers/user.controllers");
-const { setCargo , getCargoById , getAllCargo, acceptCargo ,allCargoTruck, getAllPendingCargo, completed} = require("../controllers/load.controllers.js");
+const { setCargo , getCargoById , getAllCargo, acceptCargo ,rejectCargo, allCargoTruck, getAllPendingCargo, completed} = require("../controllers/load.controllers.js");
 
 const router = express.Router();
 
