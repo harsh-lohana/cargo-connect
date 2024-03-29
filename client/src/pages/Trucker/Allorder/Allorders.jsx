@@ -5,13 +5,12 @@ import { useState , useEffect  } from 'react';
 import "../Allorder/styles.css"
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import BaseNavbar from '../../../components/Navbars/BaseNavbar';
+import TruckerNavbar from '../../../components/Navbars/TruckerNavbar';
 import Footer from '../../LandingPage/Components/Footer';
 
 export const Allorders = () => {
-
-   const [cargoList, setCargoList] = useState([]);
-   //const [loggedInUserId, setLoggedInUserId] = useState(null);
+  const [cargoList, setCargoList] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(null); // Initialize with null
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,26 +24,35 @@ export const Allorders = () => {
     };
 
     fetchData();
-    
   }, []);
 
-  const user = JSON.parse(localStorage.getItem('userInfo'));
-  const loggedInUserId = user.id;
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+    if (user) {
+      setLoggedInUserId(user.id); // Set loggedInUserId if user is not null
+    }
+  }, []);
+
+  // Log all contents of local storage
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    const value = localStorage.getItem(key);
+    console.log(`${key}: ${value}`);
+  }
 
   const navigate = useNavigate();
 
   const handleCommitment = () =>{
-   navigate("/commit");
+    navigate("/commit");
   }
 
   return (
     <div className='all'>
-      <BaseNavbar/>
+      <TruckerNavbar/>
       <h1 style={{ textAlign: 'center', fontWeight: 700 }}>CARGO LIST</h1>
       <div className="card-list">
         {cargoList.map((cargo) => (
           <Card key={cargo._id} cargo={cargo} loggedInUserId={loggedInUserId} />
-          
         ))}
       </div>
       <Footer/>

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { useRoutes } from 'react-router-dom'; 
 
-import LandingPage from "../pages/LandingPage";
+import LandingPage from "../pages/LandingPage/LandingPage";
 import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/User/DashBoard/Dashboard";

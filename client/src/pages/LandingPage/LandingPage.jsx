@@ -6,9 +6,10 @@ import Footer from "./Components/Footer.jsx";
 import data from './Components/TestimonialData.json'
 import About from "./Components/About.jsx";
 import Work from './Components/Work.jsx'
-import HomeNavbar from '../../components/Navbars/HomeNavbar.jsx'
-
+import HomeNavbar from '../../components/Navbars/HomeNavbar.jsx';
 function LandingPage() {
+
+  
   return (
     <div className="LandingPage ">
       <div className= "first">

@@ -4,8 +4,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
-import image from "../pages/LandingPage/Assets/loginTruck.jpg";
-import { Typography, TextField, Button, Select, MenuItem } from "@mui/material";
+import HomeNavbar from "../components/Navbars/HomeNavbar";
+import { Typography, TextField, Button, Select, MenuItem, Card, CardContent } from "@mui/material";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -38,7 +38,14 @@ const SignupPage = () => {
         toast.success("Signed in!");
         localStorage.setItem("userInfo", JSON.stringify(data));
         setLoading(false);
-        navigate("/");
+        
+        if (data.role === 2) {
+          navigate("/cargoconnect");
+        } else if (data.role === 1) {
+          navigate("/allorders");
+        } else {
+          navigate("/");
+        }
       } catch (error) {
         setError(error.response.data.message);
         toast.error("Invalid email or password!");
@@ -49,92 +56,82 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
-      <h1 className="text-4xl font-semibold text-blue-500 bg-yellow-200 my-3">
-        {loading ? "Loading..." : "Signup"}
-      </h1>
-      {loading ? <Loader /> : null}
-      <form action="" className="flex flex-col gap-2" onSubmit={submitHandler}>
-        <div className="flex flex-col gap-2">
-          <label
-            htmlFor="email"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            placeholder="Enter name"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setName(e.target.value)}
-          />
-          <label
-            htmlFor="email"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            E-Mail
-          </label>
-          <input
-            id="email"
-            type="email"
-            placeholder="Enter e-mail"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <label
-            htmlFor="role"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Role
-          </label>
-          <select name="role" id="role"
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="2">Customer</option>
-            <option value="1">Trucker</option>
-          </select>
-          <label
-            htmlFor="password"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            placeholder="Enter password"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <label
-            htmlFor="confirm-password"
-            className="text-lg font-semibold text-blue-500 bg-yellow-200"
-          >
-            Confirm Password
-          </label>
-          <input
-            id="confirm-password"
-            type="password"
-            placeholder="Confirm password"
-            className="mb-2 w-56 h-8"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <button
-          type="submit"
-          className="border-solid border-2 bg-yellow-300 font-semibold border-blue-500 text-blue-700 rounded-md py-1 px-2 my-2"
-        >
-          Signup
-        </button>
-        <p className="font-semibold text-blue-700 rounded-md">
-          Already a user?
-          <Link to="/login" className="underline text-blue-800">
-            {" "}
-            Login
-          </Link>
-        </p>
-      </form>
+    <div>
+      <HomeNavbar/>
+    <div className="main" style={{ backgroundColor: "#f0f4f8", color: "#333", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Card style={{ backgroundColor: "#ffffff", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
+        <CardContent style={{ padding: "40px", textAlign: "center" }}>
+          <Typography variant="h4" style={{ marginBottom: "20px", color: "#333" }}>
+            {loading ? "Loading..." : "Signup"}
+          </Typography>
+          {loading ? <Loader /> : null}
+          <form action="" onSubmit={submitHandler}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+              <TextField
+                id="name"
+                type="text"
+                placeholder="Enter name"
+                InputProps={{
+                  style: { borderColor: "#ccc" },
+                }}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <TextField
+                id="email"
+                type="email"
+                placeholder="Enter e-mail"
+                InputProps={{
+                  style: { borderColor: "#ccc" },
+                }}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <Select
+                name="role"
+                id="role"
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                style={{ borderColor: "#ccc" }}
+              >
+                <MenuItem value={2}>Customer</MenuItem>
+                <MenuItem value={1}>Trucker</MenuItem>
+              </Select>
+              <TextField
+                id="password"
+                type="password"
+                placeholder="Enter password"
+                InputProps={{
+                  style: { borderColor: "#ccc" },
+                }}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <TextField
+                id="confirm-password"
+                type="password"
+                placeholder="Confirm password"
+                InputProps={{
+                  style: { borderColor: "#ccc" },
+                }}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "20px" }}
+            >
+              Signup
+            </Button>
+            <Typography variant="subtitle1" style={{ marginTop: "20px" }}>
+              Already a user?
+              <Link to="/login" style={{ textDecoration: "underline", marginLeft: "5px", color: "#007bff" }}>
+                Login
+              </Link>
+            </Typography>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
     </div>
   );
 };

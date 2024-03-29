@@ -86,12 +86,13 @@ const Dashboard = () => {
 
     return (
         <>
-         <BaseNavbar/>
+         <UserNavbar/>
+
          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
            
            <div>
-               <h1 style={{ fontSize: '26px', fontWeight: '32px', textAlign: 'center' }}>Post consignments</h1>
-               <div style={{ display: 'flex', flexDirection: 'row' }}>
+               <h1 style={{ marginBottom : '30px', fontSize: '26px', fontWeight: '32px', textAlign: 'center' }}>Post consignments</h1>
+               <div style={{  display: 'flex', flexDirection: 'row' }}>
                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                        <label htmlFor="loadingpoint" className="label">Loading Point</label>
                        <label htmlFor="unloadingpoint" className="label">Unloading Point</label>
@@ -202,7 +203,6 @@ const Dashboard = () => {
                    </form>
                </div>
            </div>
-           <Button variant="contained" name='my_Orders' type="submit" id="login_button" onClick={handleUserOrders} style={{ width: '150px', marginTop: '12px' }}>My Posts</Button>
        </div>
         
         </>
