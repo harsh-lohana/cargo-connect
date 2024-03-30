@@ -5,7 +5,7 @@ import { useState , useEffect  } from 'react';
 import "../Allorder/styles.css"
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import BaseNavbar from '../../../components/Navbars/BaseNavbar';
+import TruckerNavbar from '../../../components/Navbars/TruckerNavbar';
 import Footer from '../../LandingPage/Components/Footer';
 
 export const Allorders = () => {
@@ -27,7 +27,7 @@ export const Allorders = () => {
   }, []);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
     if (user) {
       setLoggedInUserId(user.id); // Set loggedInUserId if user is not null
     }
@@ -42,7 +42,7 @@ export const Allorders = () => {
 
   return (
     <div className='all'>
-      <BaseNavbar/>
+      <TruckerNavbar/>
       <h1 style={{ textAlign: 'center', fontWeight: 700 }}>CARGO LIST</h1>
       <div className="card-list">
         {cargoList.map((cargo) => (

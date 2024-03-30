@@ -6,13 +6,12 @@
   
 }
 
-
-
-@font-face {
-  font-family: 'Assistant';
-  src: url('./fonts/Assistant-Regular.woff2') format('woff2'),
-       url('./fonts/Assistant-Regular.woff') format('woff');
-  /* Add more font weights and styles if needed */
+.first,
+.about,
+.testimonial,
+.contact,
+.footer {
+  width: 100%;
 }
 
 img {
@@ -249,7 +248,7 @@ nav {
 .about {
   margin-top: 30px;
   margin-bottom: 50px;
-  max-width: 800px;
+  width: 100%;
   margin-left: auto; /* Automatically adjust margin left */
   margin-right: auto; /* Automatically adjust margin right */
   display: flex;
@@ -261,6 +260,7 @@ nav {
 
 .about-description {
   font-size: 18px;
+  
   line-height: 1.5;
   color: #333; /* Set text color */
   margin-top: 20px; /* Add some top margin for spacing */

@@ -4,9 +4,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
-import image from "../pages/LandingPage/Assets/loginTruck.jpg";
-import { TextField, Button, Typography } from "@mui/material";
-import "../pages/User/DashBoard/Styles.css";
+import HomeNavbar from "../components/Navbars/HomeNavbar";
+import { TextField, Button, Typography, Card, CardContent } from "@mui/material";
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -31,18 +31,14 @@ const LoginPage = () => {
         config
       );
       toast.success("Logged in!");
-      localStorage.setItem("loggedInUser", JSON.stringify(data)); // Assuming the user role is stored in 'data.role'
+      localStorage.setItem("loggedInUser", JSON.stringify(data));
       setLoading(false);
   
-      // Redirect based on user role
       if (data.role === 2) {
-        // Redirect to cargoconnect if user role is 2
         navigate("/cargoconnect");
       } else if (data.role === 1) {
-        // Redirect to allorders if user role is 1
         navigate("/allorders");
       } else {
-        // Default redirection (if user role is neither 1 nor 2)
         navigate("/");
       }
     } catch (error) {
@@ -60,58 +56,59 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="main" style={{background : "black"}}>
-    <div className="overlay"></div>
-    <img src={image} style={{ filter: "blur(3px)" }}/>
-    <div className="content">
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <Typography variant="h4" color="white" style={{ marginBottom: "1rem" ,fontFamily: "Roboto, sans-serif" }}>
-        {loading ? "Loading..." : "Login"}
-      </Typography>
-      {loading && <Loader />}
-      <form style={{ display: "flex", flexDirection: "column", gap: "1rem" }} onSubmit={submitHandler}>
-        <TextField
-          id="email"
-          type="email"
-          label="E-Mail"
-          placeholder="Enter e-mail"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ width: 300, color:"white" }}
-        />
-        <TextField
-          id="password"
-          type="password"
-          label="Password"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ width: 300 , color: "white"}}
-        />
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          style={{ width: 80 }}
-        >
-          Login
-        </Button>
-        <Button
-          onClick={revealTestUser}
-          variant="contained"
-          color="primary"
-          style={{ width: 200}}
-        >
-          Reveal test user
-        </Button>
-        <Typography variant="body1" color="white">
-          Don't have an account?{" "}
-          <Link to="/signup" style={{ textDecoration: "underline", color: "white", cursor: "pointer" }}>
-            Signup
-          </Link>
-        </Typography>
-      </form>
-      </div>
+    <div>
+    <HomeNavbar/>
+  <div className="main" style={{ backgroundColor: "#f0f4f8", color: "#333", minHeight: "100vh", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.8)", boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)" }}>
+        <CardContent style={{ padding: "40px", textAlign: "center" }}>
+          <Typography variant="h4" style={{ marginBottom: "20px", color: "#333" }}>
+            {loading ? "Loading..." : "Login"}
+          </Typography>
+          {loading && <Loader />}
+          <form onSubmit={submitHandler} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+            <TextField
+              id="email"
+              type="email"
+              label="E-Mail"
+              placeholder="Enter e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              InputProps={{ style: { color: "#333" } }}
+            />
+            <TextField
+              id="password"
+              type="password"
+              label="Password"
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{ style: { color: "#333" } }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              style={{ width: "100%" }}
+            >
+              Login
+            </Button>
+            <Button
+              onClick={revealTestUser}
+              variant="contained"
+              color="primary"
+              style={{ width: "100%" }}
+            >
+              Reveal test user
+            </Button>
+            <Typography variant="body1">
+              Don't have an account?{" "}
+              <Link to="/signup" style={{ textDecoration: "underline", color: "#007bff", cursor: "pointer" }}>
+                Signup
+              </Link>
+            </Typography>
+          </form>
+        </CardContent>
+      </Card>
     </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import Logo from "../../pages/LandingPage/Assets/logo.webp";
 import { BsCart2 } from "react-icons/bs";
@@ -12,11 +13,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import InfoIcon from "@mui/icons-material/Info";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import { Link } from "react-router-dom";
-import "../../pages/LandingPage/Styles.css";
+import "../../pages/LandingPage/Styles.css"
 
-const HomeNavbar = () => {
+const BaseNavbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const menuOptions = [
     {
@@ -26,24 +26,17 @@ const HomeNavbar = () => {
     {
       text: "About",
       icon: <InfoIcon />,
-    },
-    {
-      text: "Testimonials",
-      icon: <ThumbUpIcon />,
-    },
+    }
   ];
   return (
     <nav>
       <div className="nav-logo-container">
-        <Link to="/">
-          <img src={Logo} alt="" style={{ maxWidth: "99px" }} />
-        </Link>
+     <Link to= "/"><img src={Logo} alt="" style={{ maxWidth: "99px" }} /> </Link> 
       </div>
-      <div className="navbar-title">
-        <Link to="/">CARGO CONNECT</Link>
-      </div>
-
+      <div className="navbar-title"><Link to="/">CARGO CONNECT</Link></div>
       <div className="navbar-links-container">
+      <Link to = "/commit">My Commitments</Link>
+        <Link to = "/logout">Logout</Link>
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
@@ -58,7 +51,7 @@ const HomeNavbar = () => {
           <List>
             {menuOptions.map((item) => (
               <ListItem key={item.text} disablePadding>
-                <ListItemButton component={Link} to={"/" + item.text.toLowerCase()}>
+                <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>
                   <ListItemText primary={item.text} />
                 </ListItemButton>
@@ -72,4 +65,4 @@ const HomeNavbar = () => {
   );
 };
 
-export default HomeNavbar;
+export default BaseNavbar;

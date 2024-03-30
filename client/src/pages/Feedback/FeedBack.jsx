@@ -6,7 +6,7 @@ export default function FeedBack() {
   const form = useRef();
   const emailRef = useRef();
   const [loading, setLoading] = useState(false);
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
 
   useEffect(() => {
     emailjs.init(import.meta.env.VITE_key);

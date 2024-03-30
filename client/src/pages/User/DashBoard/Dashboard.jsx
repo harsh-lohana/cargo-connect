@@ -4,9 +4,10 @@ import "../DashBoard/Styles.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { UserOrders } from './UserOrders';
 import BaseNavbar from '../../../components/Navbars/BaseNavbar';
+import axios from 'axios';
 
 const Dashboard = () => {
-    const user = JSON.parse(localStorage.getItem('userInfo'));
+    const user = JSON.parse(localStorage.getItem('loggedInUser'));
 
     const [cargoCredentials, setUserCredentials] = useState({
         userId: user.id,
@@ -37,7 +38,7 @@ const Dashboard = () => {
 
     const navigate = useNavigate();
 
-    const handleLogin = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
         // Check if any field is empty
@@ -46,20 +47,20 @@ const Dashboard = () => {
             return;
         }
 
-        const apiUrl = 'http://localhost:5000';
         const headers = {
+            headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${user.token}`,
+            }
         };
 
         try {
-            const data = await fetch(`${apiUrl}/api/user/cargo`, {
-                method: 'POST',
-                headers: headers,
-                body: JSON.stringify(cargoCredentials),
-            });
-            console.log(data);
-
+            // const data = await fetch(`${apiUrl}/api/user/cargo`, {
+            //     method: 'POST',
+            //     headers: headers,
+            //     body: JSON.stringify(cargoCredentials),
+            // });
+            console.log(cargoCredentials);
             // Clear form fields
             setUserCredentials({
                 ...cargoCredentials,
@@ -72,6 +73,8 @@ const Dashboard = () => {
                 deliveryDate: ""
             });
 
+            const data = await axios.post('/api/user/cargo', cargoCredentials, headers);
+            console.log(data);
             alert('Order has been posted.');
 
         } catch (error) {
@@ -87,11 +90,12 @@ const Dashboard = () => {
     return (
         <>
          <BaseNavbar/>
+
          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
            
            <div>
-               <h1 style={{ fontSize: '26px', fontWeight: '32px', textAlign: 'center' }}>Post consignments</h1>
-               <div style={{ display: 'flex', flexDirection: 'row' }}>
+               <h1 style={{ marginBottom : '30px', fontSize: '26px', fontWeight: '32px', textAlign: 'center' }}>Post consignments</h1>
+               <div style={{  display: 'flex', flexDirection: 'row' }}>
                    <div style={{ display: 'flex', flexDirection: 'column' }}>
                        <label htmlFor="loadingpoint" className="label">Loading Point</label>
                        <label htmlFor="unloadingpoint" className="label">Unloading Point</label>
@@ -198,11 +202,10 @@ const Dashboard = () => {
                                style={{ width: '350px' }}
                            />
                        </div>
-                       <Button variant="contained" type="submit" name='submit_button' id="login_button" onClick={handleLogin} style={{ width: '150px', marginTop: '12px' }}>Submit</Button>
+                       <Button variant="contained" type="submit" name='submit_button' id="login_button" onClick={handleSubmit} style={{ width: '150px', marginTop: '12px' }}>Submit</Button>
                    </form>
                </div>
            </div>
-           <Button variant="contained" name='my_Orders' type="submit" id="login_button" onClick={handleUserOrders} style={{ width: '150px', marginTop: '12px' }}>My Posts</Button>
        </div>
         
         </>

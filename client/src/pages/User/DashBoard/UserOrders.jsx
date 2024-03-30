@@ -10,7 +10,7 @@ export const UserOrders = () => {
   const [cargoList, setCargoList] = useState([]);
   const [filteredCargoList, setFilteredCargoList] = useState([]);
   const [prices, setPrices] = useState([]);
-  const user = JSON.parse(localStorage.getItem('userInfo'));
+  const user = JSON.parse(localStorage.getItem('loggedInUser'));
   const loggedInUserId = user.id;
 
   const fetchPrice = async (cargoId) => {

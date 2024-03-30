@@ -6,7 +6,7 @@ const LandingPage = ({ history }) => {
   const navigate = useNavigate();
 
   useEffect(()=>{
-    const user = JSON.parse(localStorage.getItem("userInfo"));
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
     console.log(user);
     if(!user) navigate("/login");
     if(user.role === 2) navigate('/cargoconnect');
