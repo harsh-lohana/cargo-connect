@@ -17,7 +17,7 @@ const Card = ({ cargo, loggedInUserId }) => {
         };
 
         const response = await axios.post(
-          "http://localhost:5000/api/admin/expectedPay",
+          "/api/admin/expectedPay",
           { cargoId: cargo._id },
           config
         );

@@ -17,8 +17,9 @@ const Card = ({ cargo, loggedInUserId }) => {
         loggedInUserId
       };
 
-      const response = await axios.put("http://localhost:5000/api/user/accept", payload , config);
-      console.log(response.data);
+      const response = await axios.put("/api/user/accept", payload , config);
+      window.location.reload();
+     // console.log(response.data);
     } catch (error) {
       console.error(error);
     }

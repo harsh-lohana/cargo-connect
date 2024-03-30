@@ -9,14 +9,13 @@ import BaseNavbar from '../../../components/Navbars/BaseNavbar';
 import Footer from '../../LandingPage/Components/Footer';
 
 export const Allorders = () => {
-
-   const [cargoList, setCargoList] = useState([]);
-   //const [loggedInUserId, setLoggedInUserId] = useState(null);
+  const [cargoList, setCargoList] = useState([]);
+  const [loggedInUserId, setLoggedInUserId] = useState(null); // Initialize with null
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/allcargoP");
+        const response = await axios.get("/api/user/allcargoP");
         console.log(response.data);
         setCargoList(response.data); 
       } catch (error) {
@@ -25,16 +24,20 @@ export const Allorders = () => {
     };
 
     fetchData();
-    
   }, []);
 
-  const user = JSON.parse(localStorage.getItem('userInfo'));
-  const loggedInUserId = user.id;
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+    if (user) {
+      setLoggedInUserId(user.id); // Set loggedInUserId if user is not null
+    }
+  }, []);
+
 
   const navigate = useNavigate();
 
   const handleCommitment = () =>{
-   navigate("/commit");
+    navigate("/commit");
   }
 
   return (
@@ -44,10 +47,10 @@ export const Allorders = () => {
       <div className="card-list">
         {cargoList.map((cargo) => (
           <Card key={cargo._id} cargo={cargo} loggedInUserId={loggedInUserId} />
-          
         ))}
       </div>
+      <Button>MY COMMITMENTS</Button>
       <Footer/>
-    </div>
-  );
+    </div>
+  );
 }

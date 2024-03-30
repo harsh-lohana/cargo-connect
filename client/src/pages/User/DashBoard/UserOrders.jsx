@@ -21,7 +21,7 @@ export const UserOrders = () => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/api/admin/expectedPay", { cargoId }, config);
+      const response = await axios.post("/api/admin/expectedPay", { cargoId }, config);
       return response.data;
     } catch (error) {
       console.error("Error in fetching price:", error);
@@ -32,7 +32,7 @@ export const UserOrders = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/user/allcargo");
+        const response = await axios.get("/api/user/allcargo");
         setCargoList(response.data);
         // Filter cargo list for the logged-in user
         setFilteredCargoList(response.data.filter(cargo => cargo.userId === loggedInUserId));

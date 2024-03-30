@@ -18,8 +18,9 @@ const Card = ({ cargo , loggedInUserId }) => {
         loggedInUserId
       };
 
-      const response = await axios.put("http://localhost:5000/api/user/reject", payload , config);
-      console.log(response.data);
+      const response = await axios.put("/api/user/reject", payload , config);
+      //console.log(response.data);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -38,8 +39,9 @@ const Card = ({ cargo , loggedInUserId }) => {
         loggedInUserId
       };
 
-      const response = await axios.put("http://localhost:5000/api/user/complete", payload , config);
+      const response = await axios.put("/api/user/complete", payload , config);
       //console.log(response.data);
+      window.location.reload();
       
     } catch (error) {
         console.error(error);
