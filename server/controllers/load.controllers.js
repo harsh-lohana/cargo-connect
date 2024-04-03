@@ -1,4 +1,5 @@
-const  { Cargo } = require("../models/cargo.models");
+const { Cargo } = require("../models/cargo.models");
+
 const setCargo = async (req, res) => {
     try {
         const {
@@ -11,7 +12,7 @@ const setCargo = async (req, res) => {
             deliveryDate,
             truckerId
         } = req.body;
-       // console.log(req.body);
+        // console.log(req.body);
 
         let defaultTruckerId;
 
@@ -48,7 +49,7 @@ const getCargoById = async (req, res) => {
     try {
         const cargoId = req.query.id;
 
-        const cargo = await Cargo.findById({_id: cargoId});
+        const cargo = await Cargo.findById({ _id: cargoId });
 
         if (!cargo) {
             return res.sendStatus(404).json({ error: "Cargo not found" });
@@ -66,19 +67,15 @@ const getCargoById = async (req, res) => {
 
 const getAllPendingCargo = async (req, res) => {
     try {
-        
         const allCargo = await Cargo.find({ status: 0 });
-       
         res.status(200).json(allCargo);
     } catch (error) {
-    
         console.error(error);
         res.sendStatus(500).json({ error: "Internal Server Error" });
     }
 };
 
 const acceptCargo = async (req, res) => {
-    //console.log(req.body);
     const { cargoId, loggedInUserId } = req.body;
     try {
         const cargo = await Cargo.findById(cargoId);
@@ -100,7 +97,7 @@ const acceptCargo = async (req, res) => {
 
 const getAllCargo = async (req, res) => {
     try {
-        const allAcceptedCargo = await Cargo.find(); 
+        const allAcceptedCargo = await Cargo.find();
         res.status(200).json(allAcceptedCargo);
     } catch (error) {
         console.error(error);
@@ -110,7 +107,6 @@ const getAllCargo = async (req, res) => {
 
 
 const rejectCargo = async (req, res) => {
-    //console.log(req.body);
     const { cargoId, loggedInUserId } = req.body;
     try {
         const cargo = await Cargo.findById(cargoId);
@@ -132,16 +128,16 @@ const rejectCargo = async (req, res) => {
 };
 
 
-const allCargoTruck = async(req,res)=>{
+const allCargoTruck = async (req, res) => {
     const { truckerId } = req.params;
     console.log(req.params);
-    try{
-        const allCargo = await Cargo.find({ truckerId, status: 1  });
+    try {
+        const allCargo = await Cargo.find({ truckerId, status: 1 });
         res.status(200).json(allCargo);
     }
-    catch(error){
+    catch (error) {
         console.log(error);
-        res.status(500).json({error: "kuch gadbad hai"});
+        res.status(500).json({ error: "kuch gadbad hai" });
     }
 }
 
@@ -150,21 +146,21 @@ const expectedPay = async (req, res) => {
     console.log(req.body)
     console.log(cargoId)
     try {
-      const cargo = await Cargo.findById(cargoId);
-      if (!cargo) {
-        return res.status(404).json({ error: "Cargo not found" });
-      }
-      const weight = cargo.weight;
-      const price = weight * 100;
-      res.send(price.toString()); // Send the price as a string
+        const cargo = await Cargo.findById(cargoId);
+        if (!cargo) {
+            return res.status(404).json({ error: "Cargo not found" });
+        }
+        const weight = cargo.weight;
+        const price = weight * 100;
+        res.send(price.toString()); // Send the price as a string
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
     }
-  };
+};
 
 
-  const completed =  async (req,res) => {
+const completed = async (req, res) => {
     const { cargoId, loggedInUserId } = req.body;
     try {
         const cargo = await Cargo.findById(cargoId);
@@ -183,7 +179,7 @@ const expectedPay = async (req, res) => {
     }
 
 
-  };
-  
+};
 
-module.exports = { setCargo , getCargoById , getAllCargo , acceptCargo , rejectCargo,  allCargoTruck , expectedPay ,getAllPendingCargo , completed};
+
+module.exports = { setCargo, getCargoById, getAllCargo, acceptCargo, rejectCargo, allCargoTruck, expectedPay, getAllPendingCargo, completed };

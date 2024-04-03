@@ -1,23 +1,29 @@
 import React from 'react'
 import Card from '../../../components/Cardcomponent/Card'
 import axios from 'axios';
-import { useState , useEffect  } from 'react';
-import "../Allorder/styles.css"
+import { useState, useEffect } from 'react';
+import "./styles.css"
 import { Button } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import TruckerNavbar from '../../../components/Navbars/TruckerNavbar';
 import Footer from '../../LandingPage/Components/Footer';
 
-export const Allorders = () => {
+export const AllOrders = () => {
   const [cargoList, setCargoList] = useState([]);
   const [loggedInUserId, setLoggedInUserId] = useState(null); // Initialize with null
 
   useEffect(() => {
     const fetchData = async () => {
+      const user = JSON.parse(localStorage.getItem('loggedInUser'));
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          authorization: `Bearer ${user.token}`,
+        },
+      };
       try {
-        const response = await axios.get("/api/user/allcargoP");
-        console.log(response.data);
-        setCargoList(response.data); 
+        const response = await axios.get("/api/user/allcargoP", config);
+        setCargoList(response.data);
       } catch (error) {
         console.error("Error fetching cargo data:", error);
       }
@@ -36,13 +42,13 @@ export const Allorders = () => {
 
   const navigate = useNavigate();
 
-  const handleCommitment = () =>{
+  const handleCommitment = () => {
     navigate("/commit");
   }
 
   return (
     <div className='all'>
-      <TruckerNavbar/>
+      <TruckerNavbar />
       <h1 style={{ textAlign: 'center', fontWeight: 700 }}>CARGO LIST</h1>
       <div className="card-list">
         {cargoList.map((cargo) => (
@@ -50,7 +56,7 @@ export const Allorders = () => {
         ))}
       </div>
       <Button>MY COMMITMENTS</Button>
-      <Footer/>
-    </div>
-  );
+      <Footer />
+    </div>
+  );
 }

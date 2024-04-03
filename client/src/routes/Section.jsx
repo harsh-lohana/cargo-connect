@@ -7,7 +7,7 @@ import SignupPage from "../pages/SignupPage";
 import LoginPage from "../pages/LoginPage";
 import Dashboard from "../pages/User/DashBoard/Dashboard";
 import TruckerDashboard from "../pages/Trucker/TruckerDashboard";
-import {Allorders} from "../pages/Trucker/Allorder/Allorders";
+import { AllOrders } from "../pages/Trucker/Allorder/Allorders";
 import {UserOrders} from "../pages/User/DashBoard/UserOrders";
 import {Commitment} from "../pages/Trucker/Commitment/Commitment";
 import FeedBack  from "../pages/Feedback/FeedBack";
@@ -48,7 +48,7 @@ const Router = () => {
         },
         {
           path: 'allorders',
-          element: <ProtectedRoute element={<Allorders />} role={1} />,
+          element: <ProtectedRoute element={<AllOrders />} role={1} />,
         },
         {
           path: 'commit',
